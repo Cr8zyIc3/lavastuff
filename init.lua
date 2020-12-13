@@ -48,13 +48,13 @@ if minetest.registered_items[fire_node] and lavastuff.enable_tool_fire == true t
 			local node_under = node.name
 			local def = minetest.registered_nodes[node_under]
 
-			if def.on_rightclick then
+			if def ~= nil and def.on_rightclick then
 				return def.on_rightclick(pointed.under, node, user, itemstack, pointed)
 			end
 
 			if minetest.is_protected(pointed.under, name) then return end
 
-			if def.on_ignite then
+			if def ~= nil and def.on_ignite then
 				def.on_ignite(pointed.under, user)
 			elseif minetest.get_item_group(node_under, "flammable") >= 1
 			and minetest.get_node(pointed.above).name == "air" then
